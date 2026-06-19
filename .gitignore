@@ -28,3 +28,11 @@ evidence-*.tar.gz
 # OS junk
 .DS_Store
 Thumbs.db
+
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tar.gz
+crash.log
+crash.*.log
