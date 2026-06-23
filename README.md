@@ -98,6 +98,7 @@ bash
 conftest test --policy policies --namespace compliance.sc28_aws plan.json
 conftest test --policy policies --namespace compliance.ac3_aws  plan.json
 conftest test --policy policies --namespace compliance.cm6_aws  plan.json
+
 📘 Week 3 — OSCAL Documentation (Coming Soon)
 Week 3 introduces OSCAL catalogs, profiles, and component definitions that describe the controls implemented in Weeks 1–2.
 
