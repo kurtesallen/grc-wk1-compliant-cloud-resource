@@ -2,10 +2,10 @@
 # Evidence Outputs (Self‑Attesting Controls)
 # -----------------------------------------------------------------------------
 
-output "primary_bucket_name" {
-  description = "Name of the primary data bucket."
-  value       = aws_s3_bucket.primary.bucket
-}
+#output "primary_bucket_name" {
+#  description = "Name of the primary data bucket."
+#  value       = aws_s3_bucket.primary.bucket
+#}
 
 output "log_bucket_name" {
   description = "Name of the log bucket receiving access logs."
