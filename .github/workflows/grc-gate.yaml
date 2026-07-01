@@ -30,22 +30,28 @@ jobs:
           conftest --version
 
       # ------------------------------------------------------------
-      # Run the three policy namespaces against the committed plan.json
-      # Write results to evidence/conftest-results.json
+      # DEBUG: Show what the runner actually sees
+      # ------------------------------------------------------------
+      - name: Debug working directory
+        run: |
+          echo "PWD:"
+          pwd
+          echo "Listing repo root:"
+          ls -R .
+          echo "Checking plan.json:"
+          ls -l week1/evidence/plan.json || echo "File not found"
+
+      # ------------------------------------------------------------
+      # Run the policy gate
       # ------------------------------------------------------------
       - name: Run policy gate
         run: |
           mkdir -p evidence
 
-          # Run Conftest against the Terraform plan evidence
           conftest test week1/evidence/plan.json \
             --policy week2/policies \
             --output json \
             > evidence/conftest-results.json
-      - name: Debug working directory
-        run: |
-          pwd
-          ls -R .
 
       # ------------------------------------------------------------
       # Fail the job if any policy namespace reports a failure
@@ -61,7 +67,6 @@ jobs:
 
       # ------------------------------------------------------------
       # Upload evidence even when the gate fails
-      # This is REQUIRED for compliance pipelines
       # ------------------------------------------------------------
       - name: Upload evidence artifacts
         if: always()
@@ -69,12 +74,3 @@ jobs:
         with:
           name: grc-evidence
           path: evidence/
-
-      # ------------------------------------------------------------
-      # STRETCH GOAL (commented out)
-      # Generate plan.json in CI using OIDC + AWS role assumption
-      # ------------------------------------------------------------
-      # - name: Generate plan.json using AWS OIDC
-      #   run: |
-      #     # Example placeholder — Week 3 brief explains the full flow
-      #     echo "OIDC role assumption and terraform plan generation goes here"
